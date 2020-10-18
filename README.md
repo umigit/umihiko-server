@@ -1,7 +1,7 @@
 # express-test
-## Discription
+## Description
 express学習のためのリポジトリ
-## 構成
+## Construction
 * docker
 * node.js
 * yarn
