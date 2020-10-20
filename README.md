@@ -1,6 +1,6 @@
 # umihiko-server
 ## Description
-自分用のサイトのサーバ側
+Server side of my website.
 ## Construction
 * docker
 * node.js
