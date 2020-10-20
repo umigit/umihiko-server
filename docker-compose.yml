@@ -12,13 +12,13 @@ services:
   install:
     extends:
       service: app-base
-    working_dir: /var/www/testapp
+    working_dir: /var/www/umihiko-server
     command: yarn install
 
   app:
     extends:
       service: app-base
-    working_dir: /var/www/testapp
+    working_dir: /var/www/umihiko-server
     ports:
       - 3000:3000
     command: yarn start dev
