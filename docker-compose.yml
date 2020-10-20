@@ -46,6 +46,6 @@ services:
       POSTGRES_DB: db_dev
       TZ: 'Asia/Tokyo'
     volumes:
-      - .docker/db/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+      - .docker/db/data:/var/lib/postgresql/data
     ports:
       - 5432:5432
