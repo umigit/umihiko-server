@@ -2,7 +2,7 @@
   "development": {
     "username": "admin",
     "password": "admin",
-    "database": "db_dev",
+    "database": "umihiko_db_dev",
     "host": "db",
     "dialect": "postgres"
   },
