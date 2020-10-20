@@ -1,6 +1,6 @@
-# express-test
+# umihiko-server
 ## Description
-express学習のためのリポジトリ
+自分用のサイトのサーバ側
 ## Construction
 * docker
 * node.js
