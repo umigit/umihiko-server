@@ -116,3 +116,5 @@ dist
 .pnp.*
 
 .docker/db/data
+
+.vscode
