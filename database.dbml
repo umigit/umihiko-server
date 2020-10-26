@@ -1,0 +1,52 @@
+Table articles {
+  id integer [primary key]
+  title varchar [not null]
+  body text [not null]
+  keywords text
+  thumbnail_url varchar
+  publish_date date [default: `now()`]
+  expire_date date
+  available boolean
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+}
+
+Table tags {
+  id integer [primary key]
+  name varchar [not null]
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+}
+
+Table article_tag {
+  id integer [primary key]
+  article_id integer [ref: > articles.id]
+  tag_id integer [ref: > tags.id]
+}
+
+Table profiles {
+  id integer [primary key]
+  name varchar [not null]
+  summary text
+  body text
+  picture_url varchar
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+}
+
+Table links {
+  id integer [primary key]
+  name varchar [not null]
+  url varchar [not null]
+  comment varchar
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+}
+
+Table skills {
+  id integer [primary key]
+  name varchar [not null]
+  body text
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+}
