@@ -14,6 +14,13 @@ services:
       service: app-base
     command: yarn install
 
+  watch:
+    extends:
+      service: app-base
+    command: yarn watch
+    depends_on:
+      - install
+
   app:
     extends:
       service: app-base
@@ -45,6 +52,6 @@ services:
       POSTGRES_DB: db_dev
       TZ: 'Asia/Tokyo'
     volumes:
-      - .docker/db/data:/var/lib/postgresql/data
+      - ./docker/db/data:/var/lib/postgresql/data
     ports:
       - 5432:5432
