@@ -3,9 +3,9 @@ FROM node:12-alpine
 
 WORKDIR /var/www
 
-COPY ./src ./
+COPY ./src/package.json .
+COPY ./src/yarn.lock .
 
 RUN yarn install
 
-EXPOSE 8080
-CMD [ "node", "server.js" ]
+COPY ./src .

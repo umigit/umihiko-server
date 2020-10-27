@@ -1,3 +1,10 @@
+Project Umihiko {
+database_type: 'PostgreSQL'
+note: '''
+  # Umihiko Database
+'''
+}
+
 Table articles {
   id integer [primary key]
   title varchar [not null]

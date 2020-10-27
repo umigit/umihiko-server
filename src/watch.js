@@ -11,7 +11,7 @@ console.log(env);
 const watchDir = env === 'development' ? server : dist;
 // Initialize watcher.
 const watcher = chokidar.watch(watchDir, {
-  ignored: /(^|[\/\\])\../, // ignore dotfiles
+  ignored: /^\./, // ignore dotfiles
   persistent: true,
 });
 

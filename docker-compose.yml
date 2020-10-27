@@ -1,44 +1,40 @@
 version: '3'
 
 services:
-  app-base:
-    image: node:12-alpine
+  app-base: &app-base
+    build:
+      context: .
+      dockerfile: ./node/Dockerfile
     working_dir: /var/www
     volumes:
       - ./src:/var/www
+      - /var/www/node_modules
     stdin_open: true
     tty: true
 
-  install:
-    extends:
-      service: app-base
-    command: yarn install
-
   watch:
-    extends:
-      service: app-base
+    <<: *app-base
     command: yarn watch
     depends_on:
-      - install
+      - db
 
   app:
-    extends:
-      service: app-base
+    <<: *app-base
     ports:
       - 3000:3000
     command: yarn dev
     depends_on:
       - db
-      - install
 
   nginx:
     image: nginx:alpine
+    restart: always
     ports:
       - 80:80
     volumes:
       - ./src:/var/www
-      - ./docker/nginx/log:/var/log/nginx/
-      - ./docker/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/log:/var/log/nginx/
+      - ./nginx/conf.d:/etc/nginx/conf.d
     depends_on:
       - app
       - db
@@ -52,6 +48,6 @@ services:
       POSTGRES_DB: db_dev
       TZ: 'Asia/Tokyo'
     volumes:
-      - ./docker/db/data:/var/lib/postgresql/data
+      - ./postgresql:/var/lib/postgresql
     ports:
       - 5432:5432
