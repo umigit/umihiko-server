@@ -1,4 +1,3 @@
-# 一旦不使用
 FROM node:12-alpine
 
 WORKDIR /var/www

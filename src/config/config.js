@@ -1,8 +1,8 @@
 export default {
   development: {
-    username: 'admin',
-    password: 'admin',
-    database: 'umihiko_db_dev',
+    username: 'postgres',
+    password: 'postgres',
+    database: 'postgres',
     host: 'db',
     dialect: 'postgres',
   },

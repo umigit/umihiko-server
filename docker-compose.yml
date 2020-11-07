@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  app-base: &app-base
+  watch:
     build:
       context: .
       dockerfile: ./node/Dockerfile
@@ -11,15 +11,20 @@ services:
       - /var/www/node_modules
     stdin_open: true
     tty: true
-
-  watch:
-    <<: *app-base
     command: yarn watch
     depends_on:
       - db
 
   app:
-    <<: *app-base
+    build:
+      context: .
+      dockerfile: ./node/Dockerfile
+    working_dir: /var/www
+    volumes:
+      - ./src:/var/www
+      - /var/www/node_modules
+    stdin_open: true
+    tty: true
     ports:
       - 3000:3000
     command: yarn dev
@@ -28,7 +33,7 @@ services:
 
   nginx:
     image: nginx:alpine
-    restart: always
+    restart: unless-stopped
     ports:
       - 80:80
     volumes:
@@ -41,11 +46,11 @@ services:
 
   db:
     image: postgres:13-alpine
-    restart: always
+    restart: unless-stopped
     environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: admin
-      POSTGRES_DB: db_dev
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
       TZ: 'Asia/Tokyo'
     volumes:
       - ./postgresql:/var/lib/postgresql
