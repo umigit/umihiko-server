@@ -1,0 +1,70 @@
+version: '3'
+
+services:
+  workspaces:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: sleep infinity
+    volumes:
+      - ..:/workspaces:cached
+      - ~/.gitconfig:/root/.gitconfig
+      # Uncomment if you use fish.
+      # - .local/share/fish:/root/.local/share/fish
+      # - ~/.config/fish:/root/.config/fish
+      # - ~/.config/fisher:/root/.config/fisher
+  watch:
+    build:
+      context: ..
+      dockerfile: ./node/Dockerfile
+    working_dir: /var/www
+    volumes:
+      - ../src:/var/www
+      - /var/www/node_modules
+    stdin_open: true
+    tty: true
+    command: yarn watch
+    depends_on:
+      - db
+
+  app:
+    build:
+      context: ..
+      dockerfile: ./node/Dockerfile
+    working_dir: /var/www
+    volumes:
+      - ../src:/var/www
+      - /var/www/node_modules
+    stdin_open: true
+    tty: true
+    ports:
+      - 3000:3000
+    command: yarn dev
+    depends_on:
+      - db
+
+  nginx:
+    image: nginx:alpine
+    restart: unless-stopped
+    ports:
+      - 80:80
+    volumes:
+      - ../src:/var/www
+      - ../nginx/log:/var/log/nginx/
+      - ../nginx/conf.d:/etc/nginx/conf.d
+    depends_on:
+      - app
+      - db
+
+  db:
+    image: postgres:13-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+      TZ: 'Asia/Tokyo'
+    volumes:
+      - ../postgresql:/var/lib/postgresql
+    ports:
+      - 5432:5432

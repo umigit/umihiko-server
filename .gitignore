@@ -118,3 +118,4 @@ dist
 .docker/db/data
 
 .vscode
+.devcontainer/.local
