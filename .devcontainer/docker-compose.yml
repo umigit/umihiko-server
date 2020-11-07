@@ -9,10 +9,9 @@ services:
     volumes:
       - ..:/workspaces:cached
       - ~/.gitconfig:/root/.gitconfig
-      # Uncomment if you use fish.
-      # - .local/share/fish:/root/.local/share/fish
-      # - ~/.config/fish:/root/.config/fish
-      # - ~/.config/fisher:/root/.config/fisher
+      - .local/share/fish:/root/.local/share/fish
+      - ~/.config/fish:/root/.config/fish
+      - ~/.config/fisher:/root/.config/fisher
   watch:
     build:
       context: ..
