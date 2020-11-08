@@ -1,17 +1,17 @@
-export default {
+module.exports = {
   development: {
     username: 'postgres',
     password: 'postgres',
-    database: 'postgres',
+    database: 'database_development',
     host: 'db',
     dialect: 'postgres',
   },
   test: {
-    username: 'root',
-    password: null,
+    username: 'postgres',
+    password: 'postgres',
     database: 'database_test',
-    host: '127.0.0.1',
-    dialect: 'mysql',
+    host: 'db',
+    dialect: 'postgres',
   },
   production: {
     username: 'root',
