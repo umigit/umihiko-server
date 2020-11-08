@@ -5,22 +5,27 @@ note: '''
 '''
 }
 
+Table users {
+  id varchar [primary key, unique]
+  name varchar [not null]
+  summary text
+  introducton text
+  picture_url varchar
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+}
+
 Table articles {
   id integer [primary key]
+  user_id varchar [not null, ref: > users.id]
   title varchar [not null]
-  body text [not null]
+  body_as_markdown text [not null]
+  body_as_html text [not null]
   keywords text
   thumbnail_url varchar
   publish_date date [default: `now()`]
   expire_date date
   available boolean
-  created_at timestamp [default: `now()`]
-  updated_at timestamp [default: `now()`]
-}
-
-Table tags {
-  id integer [primary key]
-  name varchar [not null]
   created_at timestamp [default: `now()`]
   updated_at timestamp [default: `now()`]
 }
@@ -31,12 +36,9 @@ Table article_tag {
   tag_id integer [ref: > tags.id]
 }
 
-Table profiles {
+Table tags {
   id integer [primary key]
   name varchar [not null]
-  summary text
-  body text
-  picture_url varchar
   created_at timestamp [default: `now()`]
   updated_at timestamp [default: `now()`]
 }
