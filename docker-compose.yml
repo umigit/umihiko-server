@@ -8,7 +8,7 @@ services:
     working_dir: /var/www
     volumes:
       - ./src:/var/www
-      - /var/www/node_modules
+      - node_modules:/var/www/node_modules
     stdin_open: true
     tty: true
     command: yarn watch
@@ -22,7 +22,7 @@ services:
     working_dir: /var/www
     volumes:
       - ./src:/var/www
-      - /var/www/node_modules
+      - node_modules:/var/www/node_modules
     stdin_open: true
     tty: true
     ports:
@@ -37,7 +37,6 @@ services:
     ports:
       - 80:80
     volumes:
-      - ./src:/var/www
       - ./nginx/log:/var/log/nginx/
       - ./nginx/conf.d:/etc/nginx/conf.d
     depends_on:
@@ -53,6 +52,22 @@ services:
       POSTGRES_DB: database_development
       TZ: 'Asia/Tokyo'
     volumes:
-      - ./postgresql:/var/lib/postgresql
+      - db-data:/var/lib/postgresql
     ports:
       - 5432:5432
+
+  pgadmin4:
+    image: dpage/pgadmin4
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@pgadmin4.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    depends_on:
+      - db
+
+volumes:
+  db-data:
+  pgadmin-data:
+  node_modules:
