@@ -25,8 +25,6 @@ services:
       - node_modules:/var/www/node_modules
     stdin_open: true
     tty: true
-    ports:
-      - 3000:3000
     command: yarn dev
     depends_on:
       - db
@@ -52,9 +50,7 @@ services:
       POSTGRES_DB: database_development
       TZ: 'Asia/Tokyo'
     volumes:
-      - db-data:/var/lib/postgresql
-    ports:
-      - 5432:5432
+      - db-data:/var/lib/postgresql/data
 
   pgadmin4:
     image: dpage/pgadmin4
