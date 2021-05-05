@@ -1,31 +1,28 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('users', {
+    await queryInterface.createTable('tools', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      cognito_user_id: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true,
-      },
       name: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      email: {
+      experience_period: {
         type: Sequelize.STRING,
+      },
+      skilled: {
+        type: Sequelize.BOOLEAN,
         allowNull: false,
-        unique: true,
+        defaultValue: false,
       },
-      summary: {
-        type: Sequelize.TEXT,
-      },
-      introduction: {
-        type: Sequelize.TEXT,
+      like: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
       },
       created_at: {
         allowNull: false,
@@ -38,6 +35,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('users');
+    await queryInterface.dropTable('tools');
   },
 };

@@ -6,8 +6,10 @@ note: '''
 }
 
 Table users {
-  id varchar [primary key, unique]
+  id integer [primary key, unique]
+  cognito_user_id integer [unique]
   name varchar [not null]
+  email varchar [not null]
   summary text
   introducton text
   picture_url varchar
@@ -25,7 +27,7 @@ Table articles {
   thumbnail_url varchar
   publish_date date [default: `now()`]
   expire_date date
-  available boolean
+  available boolean [default: false]
   created_at timestamp [default: `now()`]
   updated_at timestamp [default: `now()`]
 }
@@ -52,10 +54,87 @@ Table links {
   updated_at timestamp [default: `now()`]
 }
 
-Table skills {
+Table projects {
   id integer [primary key]
   name varchar [not null]
-  body text
+  summary varchar
+  detail text
+  start_date date
+  end_date date
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+}
+
+Table programing_languages {
+  id integer [primary key]
+  name varchar [not null]
+  experience_period varchar
+  skilled boolean [default: false]
+  like boolean [default: false]
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+}
+
+Table frameworks {
+  id integer [primary key]
+  name varchar [not null]
+  experience_period varchar
+  skilled boolean [default: false]
+  like boolean [default: false]
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+}
+
+Table operating_systems {
+  id integer [primary key]
+  name varchar [not null]
+  experience_period varchar
+  skilled boolean [default: false]
+  like boolean [default: false]
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+}
+
+Table databases {
+  id integer [primary key]
+  name varchar [not null]
+  experience_period varchar
+  skilled boolean [default: false]
+  like boolean [default: false]
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+}
+
+Table services {
+  id integer [primary key]
+  name varchar [not null]
+  experience_period varchar
+  skilled boolean [default: false]
+  like boolean [default: false]
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+}
+
+Table tools {
+  id integer [primary key]
+  name varchar [not null]
+  experience_period varchar
+  skilled boolean [default: false]
+  like boolean [default: false]
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+}
+
+Table qualifications {
+  id integer [primary key]
+  name varchar [not null]
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+}
+
+Table educations {
+  id integer [primary key]
+  name varchar [not null]
   created_at timestamp [default: `now()`]
   updated_at timestamp [default: `now()`]
 }
