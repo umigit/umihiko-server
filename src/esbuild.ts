@@ -25,7 +25,7 @@ const inputDirs = [
   './routes',
   './config',
 ];
-const outputDir = './dist';
+const outputDir = '../dist';
 
 const inputs = inputDirs
   .map((inputDir) => getFilePaths(inputDir))
@@ -35,6 +35,7 @@ const inputs = inputDirs
 build({
   entryPoints: inputs,
   outdir: outputDir,
+  external: ['pg-hstore'],
   platform: 'node',
   format: 'cjs',
   minify: process.env.NODE_ENV === 'production',
