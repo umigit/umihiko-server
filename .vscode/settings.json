@@ -1,0 +1,8 @@
+{
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "prettier.ignorePath": "./src/.prettierignore",
+  "prettier.configPath": "./src/.prettierrc"
+}
