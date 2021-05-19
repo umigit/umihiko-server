@@ -1,20 +1,6 @@
 version: '3'
 
 services:
-  watch:
-    build:
-      context: .
-      dockerfile: ./node/Dockerfile
-    working_dir: /var/www
-    volumes:
-      - ./src:/var/www
-      - node_modules:/var/www/node_modules
-    stdin_open: true
-    tty: true
-    command: yarn watch
-    depends_on:
-      - db
-
   app:
     build:
       context: .
